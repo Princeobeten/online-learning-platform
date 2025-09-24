@@ -1,0 +1,10 @@
+<svg width="500" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="500" height="400" fill="#152345" />
+  <g fill="#2563eb">
+    <circle cx="250" cy="120" r="60" opacity="0.6" />
+    <rect x="150" y="200" width="200" height="30" rx="5" opacity="0.4" />
+    <rect x="180" y="250" width="140" height="20" rx="5" opacity="0.4" />
+    <rect x="200" y="290" width="100" height="20" rx="5" opacity="0.4" />
+  </g>
+  <text x="250" y="350" font-family="Arial" font-size="16" fill="#ffffff" text-anchor="middle">Online Learning Platform</text>
+</svg>

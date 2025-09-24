@@ -1,6 +1,6 @@
-Online Learning Platform for Nigerian Universities - Minimal Prototype
-This README provides guidelines for building a minimal viable prototype (MVP) of an Online Learning Platform tailored for Nigerian universities, as outlined in the provided document. The prototype uses Next.js (App Router) for the frontend and backend, MongoDB with Mongoose for data persistence, and React Context for global state management (e.g., authentication, course data, and database integration). The focus is on core features: user authentication, course browsing/management, live class simulation (UI-based), discussion forums, and basic assessment submission. Video conferencing and advanced notifications (e.g., email/SMS) are simulated via UI updates for the MVP to prioritize rapid development.
-The system addresses the weaknesses of traditional in-person learning in Nigerian universities by providing a flexible, accessible, and resilient e-learning platform. Development follows an Agile methodology, emphasizing iterative delivery and modularity, with a clean UI/UX using pre-configured Tailwind CSS.
+UNICROSS Online Learning Platform - Minimal Prototype
+This README provides guidelines for building a minimal viable prototype (MVP) of the UNICROSS Online Learning Platform tailored for Nigerian universities, as outlined in the provided document. The prototype uses Next.js (App Router) for the frontend and backend, MongoDB with Mongoose for data persistence, and React Context for global state management (e.g., authentication, course data, and database integration). The focus is on core features: user authentication, course browsing/management, live class simulation (UI-based), discussion forums, and basic assessment submission. Video conferencing and advanced notifications (e.g., email/SMS) are simulated via UI updates for the MVP to prioritize rapid development.
+The system addresses the weaknesses of traditional in-person learning in Nigerian universities by providing a flexible, accessible, and resilient e-learning platform. Development follows an Agile methodology, emphasizing iterative delivery and modularity, with a modern, visually appealing UI/UX using pre-configured Tailwind CSS and the Bricolage Grotesque font from @next/font for a sleek, contemporary aesthetic.
 Folder Structure
 ├── /app                  # Next.js app directory (App Router)
 │   ├── /api              # API routes (e.g., /api/auth/login, /api/courses, /api/forums)
@@ -50,7 +50,7 @@ Development Guidelines
 Node.js: v18+.
 MongoDB: Use MongoDB Atlas (free tier) for cloud DB. Set MONGODB_URI in .env.local.
 Tailwind CSS: Already configured in tailwind.config.js. Use utility classes for styling.
-Install Dependencies (if not already installed):npm install next react react-dom mongoose react-hot-toast bcrypt
+Install Dependencies (if not already installed):npm install next react react-dom mongoose react-hot-toast bcrypt @next/font
 
 
 Run the Project:npm run dev  # Development server at http://localhost:3000
@@ -106,9 +106,51 @@ In context/hook: On forum post or assessment submission, update UI state. Use re
 
 4. UI/UX Design
 
-Styling: Use pre-configured Tailwind CSS for a modern, clean design (e.g., blue/white theme for Nigerian university branding, bg-blue-600, text-white).
-Pages Layout: Responsive, intuitive (navbar with links: Home, Courses, Forum, Dashboard, Login/Logout).
-Best Practices: Loading spinners (animate-spin), error toasts (react-hot-toast). Consistent typography/spacing (e.g., p-4, shadow-md).
+Styling: Use pre-configured Tailwind CSS for a modern, sleek, and professional design that enhances user engagement and aligns with contemporary e-learning platforms. The UI is designed to be visually appealing, intuitive, and accessible, leveraging the Bricolage Grotesque font from @next/font for a clean, modern typography that reflects a cutting-edge educational experience. Implement the font in layout.tsx as follows:
+import { Bricolage_Grotesque } from 'next/font/google';
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+});
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={bricolage.className}>
+      <body>{children}</body>
+    </html>
+  );
+}
+
+Apply the following color scheme for a cohesive, modern aesthetic:
+
+Text: #ffffff (white) - Primary text color for readability on dark backgrounds (e.g., text-white for headings, body text).
+Foreground: #152345 (dark blue-gray) - Used for inputs, cards, borders, and secondary elements (e.g., bg-[#152345] for card backgrounds, border-[#152345] for form inputs).
+CTA (Call-to-Action): #2563eb (blue) - Primary buttons and interactive elements (e.g., bg-[#2563eb] for "Enroll Now" or "Submit Assignment" buttons, hover:bg-[#1d4ed8] for hover states).
+Main Background: #111827 (dark gray) - Overall page background (e.g., bg-[#111827] in layout or body).
+
+Tailwind Configuration Update: Extend tailwind.config.js with custom colors:
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#152345',  // Foreground for inputs, cards
+        cta: '#2563eb',      // CTA buttons
+        background: '#111827', // Main background
+      },
+      fontFamily: {
+        bricolage: ['Bricolage Grotesque', 'sans-serif'],
+      },
+    },
+  },
+};
+
+Use classes like bg-background text-white border-primary font-bricolage for cards, bg-cta text-white font-bricolage for buttons, and ensure contrast for accessibility (WCAG-compliant). The Bricolage Grotesque font should be applied universally to text elements (headings, paragraphs, buttons) for a consistent, modern look that elevates the platform’s visual identity.
+
+Pages Layout: Responsive, intuitive (navbar with links: Home, Courses, Forum, Dashboard, Login/Logout). Dark theme by default for reduced eye strain during extended study sessions, with Bricolage Grotesque ensuring a polished, professional typography.
+
+Best Practices: Loading spinners (animate-spin), error toasts (react-hot-toast). Consistent typography/spacing (e.g., p-4, shadow-md). Ensure mobile-first design for Nigerian users on varying devices, with Bricolage Grotesque enhancing readability across screen sizes.
+
 
 5. Error Handling and Best Practices
 
@@ -116,7 +158,7 @@ Errors: In hooks/API: try-catch, log specifics (e.g., console.error('Course fetc
 Security (MVP): Basic (hashed passwords, role checks). No advanced auth.
 Modularity: Hooks for API logic; context spreads state/DB access.
 Testing: Add /scripts/test.js for basic API tests (e.g., using supertest). Run node scripts/test.js.
-Performance: Use Next.js Image for thumbnails, server components for static content.
+Performance: Use Next.js Image for thumbnails, server components for static content, and optimize font loading with @next/font.
 
 6. High-Level System Flow (Agile Approach)
 
@@ -141,7 +183,7 @@ Build MVP (Iterative Sprints):
 Sprint 1: Implement models, dbConnect, auth hook/API, login page.
 Sprint 2: Add course model/hook/API, course pages.
 Sprint 3: Add forum/assessment hooks/APIs, dashboard.
-Sprint 4: Test flows, polish UI, simulate live classes.
+Sprint 4: Test flows, polish UI with Bricolage Grotesque, simulate live classes.
 
 
 Deploy: Use Vercel (free) for Next.js hosting.
@@ -155,5 +197,5 @@ Basic assessment system (no complex grading logic).
 Limited analytics (extend later for performance tracking).
 
 Goal
-Build a functional, impressive MVP in 2-3 weeks: Authenticated users browse courses, participate in forums, submit assessments, and lecturers manage content with a clean UI. Extendable for full features (e.g., video streaming, analytics).
+Build a functional, modern, and visually impressive MVP in 2-3 weeks: Authenticated users browse courses, participate in forums, submit assessments, and lecturers manage content with a sleek UI powered by Bricolage Grotesque and a cohesive color scheme. Extendable for full features (e.g., video streaming, analytics).
 For questions, reference the project document. Contribute via PRs with clear commit messages.
